@@ -1,4 +1,4 @@
-program rkn_tray;
+program rkn_bypasser_gui;
 
 uses
   Winapi.Windows,
@@ -30,6 +30,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := False;
   Application.ShowMainForm := False;
+  Application.Title := 'rkn-bypasser-gui';
   TStyleManager.TrySetStyle('Carbon');
   Application.CreateForm(TfSettings, fSettings);
   Application.CreateForm(TfAbout, fAbout);
