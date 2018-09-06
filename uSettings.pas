@@ -33,6 +33,7 @@ type
     miExit: TMenuItem;
     N6: TMenuItem;
     N7: TMenuItem;
+    miIPs: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure SaveBtnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -42,10 +43,11 @@ type
     procedure miSettingsClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure miRestartClick(Sender: TObject);
     procedure miReplacePersonalityClick(Sender: TObject);
     procedure miLogsClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure miIPsClick(Sender: TObject);
+    procedure miRestartClick(Sender: TObject);
   private
   public
     procedure ReloadSettings();
@@ -66,13 +68,16 @@ var
   dwRknPID: THandle = 0;
 
 procedure CenteringWindow(Window: HWND; Parent: HWND; const TopMost: BOOL = False);
+procedure Stop(const ShowMessage: Boolean = True);
+function StartTor(): Boolean;
+function StartRknBypasser(): Boolean;
 
 implementation
 
 {$R *.dfm}
 
 uses
-  uAbout, uLogs;
+  uAbout, uLogs, uAdditionalIps;
 
 const
   AutorunPath = 'Software\Microsoft\Windows\CurrentVersion\Run';
@@ -180,7 +185,7 @@ begin
   StartupInfo.wShowWindow := SW_HIDE;
   if CreateProcessW(nil, LPWSTR(WideString(ExtractFilePath(ParamStr(0)) + BypasserPath +
     ' --bind-addr ' + szProxyHost + ':' + IntToStr(iProxyPort) + ' --tor-addr ' +
-    szProxyHost + ':' + IntToStr(iTorPort))), nil, nil, False, CREATE_NO_WINDOW, nil, nil,
+    szProxyHost + ':' + IntToStr(iTorPort) + ' --with-additional-ips')), nil, nil, False, CREATE_NO_WINDOW, nil, nil,
     StartupInfo, ProcessInfo) then
     dwRknPID := ProcessInfo.dwProcessId
   else
@@ -255,6 +260,11 @@ begin
     Stop();
     Halt(0);
   end;
+end;
+
+procedure TfSettings.miIPsClick(Sender: TObject);
+begin
+  fAdditionalIps.Show;
 end;
 
 procedure TfSettings.miLogsClick(Sender: TObject);
@@ -373,6 +383,8 @@ begin
       SetForegroundWindow(fAbout.Handle)
     else if IsWindowVisible(fLogs.Handle) then
       SetForegroundWindow(fLogs.Handle)
+    else if IsWindowVisible(fAdditionalIps.Handle) then
+      SetForegroundWindow(fAdditionalIps.Handle)
     else
     begin
       MsgBox := GetApplicationMessageBoxHandle();
@@ -397,6 +409,7 @@ end;
 procedure TfSettings.FormCreate(Sender: TObject);
 begin
   ReloadSettings;
+  tiTray.Hint := ProgramName;
   tiTray.Icon.Assign(Application.Icon);
   if StartTor() then
   begin

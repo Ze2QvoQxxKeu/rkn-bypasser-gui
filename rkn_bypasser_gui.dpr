@@ -7,7 +7,8 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   uAbout in 'uAbout.pas' {fAbout},
-  uLogs in 'uLogs.pas' {fLogs};
+  uLogs in 'uLogs.pas' {fLogs},
+  uAdditionalIps in 'uAdditionalIps.pas' {fAdditionalIps};
 
 {$R *.res}
 
@@ -35,6 +36,7 @@ begin
   Application.CreateForm(TfSettings, fSettings);
   Application.CreateForm(TfAbout, fAbout);
   Application.CreateForm(TfLogs, fLogs);
+  Application.CreateForm(TfAdditionalIps, fAdditionalIps);
   Application.Run;
 end.
 
