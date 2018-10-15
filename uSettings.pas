@@ -55,7 +55,7 @@ type
   end;
 
 resourcestring
-  ProgramName = 'rkn-bypasser-gui';
+  ProgramName = 'RKN Bypasser GUI';
   ConnectedToTor = 'Подключено к Tor';
   ConnectionError = 'Ошибка подключения к Tor';
   DisconnectedToTor = 'Отключено от Tor';
@@ -68,8 +68,11 @@ var
   dwRknPID: THandle = 0;
 
 procedure CenteringWindow(Window: HWND; Parent: HWND; const TopMost: BOOL = False);
+
 procedure Stop(const ShowMessage: Boolean = True);
+
 function StartTor(): Boolean;
+
 function StartRknBypasser(): Boolean;
 
 implementation
@@ -185,8 +188,8 @@ begin
   StartupInfo.wShowWindow := SW_HIDE;
   if CreateProcessW(nil, LPWSTR(WideString(ExtractFilePath(ParamStr(0)) + BypasserPath +
     ' --bind-addr ' + szProxyHost + ':' + IntToStr(iProxyPort) + ' --tor-addr ' +
-    szProxyHost + ':' + IntToStr(iTorPort) + ' --with-additional-ips')), nil, nil, False, CREATE_NO_WINDOW, nil, nil,
-    StartupInfo, ProcessInfo) then
+    szProxyHost + ':' + IntToStr(iTorPort) + ' --with-additional-ips')), nil, nil, False,
+    CREATE_NO_WINDOW, nil, nil, StartupInfo, ProcessInfo) then
     dwRknPID := ProcessInfo.dwProcessId
   else
     dwRknPID := 0;
@@ -307,10 +310,9 @@ begin
   with TRegistry.Create() do
   try
     OpenKey(AutorunPath, True);
-    if cbAutoRun.Checked then
+    cbAutoRun.Checked := ValueExists(ProgramName);
+    if ValueExists(ProgramName) then
       WriteString(ProgramName, Application.ExeName)
-    else if ValueExists(ProgramName) then
-      DeleteValue(ProgramName);
   finally
     Free;
   end;
@@ -331,6 +333,16 @@ end;
 
 procedure TfSettings.SaveBtnClick(Sender: TObject);
 begin
+  with TRegistry.Create() do
+  try
+    OpenKey(AutorunPath, True);
+    if cbAutoRun.Checked then
+      WriteString(ProgramName, Application.ExeName)
+    else if ValueExists(ProgramName) then
+      DeleteValue(ProgramName);
+  finally
+    Free;
+  end;
   with TIniFile.Create(ExtractFilePath(ParamStr(0)) + IniFileName) do
   try
     WriteString(IniSectionName, IniProxyHost, ipeBindAddr.Text);
@@ -368,7 +380,8 @@ type
   end;
 
 begin
-  EnumWindows(@EnumWindowsProc, Integer(@Result));
+  Result := 0;
+  {$IFDEF WIN32}EnumWindows(@EnumWindowsProc, Integer(@Result));{$ENDIF}
 end;
 
 procedure TfSettings.tiTrayMouseDown(Sender: TObject; Button: TMouseButton; Shift:

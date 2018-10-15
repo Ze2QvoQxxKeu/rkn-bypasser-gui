@@ -225,6 +225,7 @@ object fLogs: TfLogs
     Height = 114
     Align = alTop
     ReadOnly = True
+    ScrollBars = ssBoth
     TabOrder = 0
   end
   object BypasserLogs: TMemo
@@ -234,6 +235,7 @@ object fLogs: TfLogs
     Height = 97
     Align = alClient
     ReadOnly = True
+    ScrollBars = ssBoth
     TabOrder = 1
   end
 end

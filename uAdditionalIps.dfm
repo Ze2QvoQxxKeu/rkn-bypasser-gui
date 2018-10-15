@@ -198,7 +198,6 @@ object fAdditionalIps: TfAdditionalIps
     ItemHeight = 13
     PopupMenu = pmMenu
     TabOrder = 0
-    ExplicitWidth = 232
   end
   object SaveBtn: TButton
     Left = 0
@@ -210,9 +209,6 @@ object fAdditionalIps: TfAdditionalIps
     Default = True
     TabOrder = 1
     OnClick = SaveBtnClick
-    ExplicitLeft = 105
-    ExplicitTop = 231
-    ExplicitWidth = 75
   end
   object pmMenu: TPopupMenu
     Images = ilMenu

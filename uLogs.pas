@@ -44,39 +44,43 @@ var
   Line: AnsiString;
   ConsoleHandle: DWORD;
 begin
-  if AttachConsole(PID) then
-    ConsoleHandle := GetStdHandle(STD_OUTPUT_HANDLE);
-  Result := TStringList.Create;
+  try
+    if AttachConsole(PID) then
+      ConsoleHandle := GetStdHandle(STD_OUTPUT_HANDLE);
+    Result := TStringList.Create;
 
-  ZeroMemory(@BufferInfo, SizeOf(BufferInfo));
-  if not GetConsoleScreenBufferInfo(ConsoleHandle, BufferInfo) then
-    raise Exception.Create('GetConsoleScreenBufferInfo error: ' + IntToStr(GetLastError));
+    ZeroMemory(@BufferInfo, SizeOf(BufferInfo));
+    if not GetConsoleScreenBufferInfo(ConsoleHandle, BufferInfo) then
+    //  raise Exception.Create('GetConsoleScreenBufferInfo error: ' + IntToStr(GetLastError));
+    Sleep(1);
 
-  SetLength(Buffer, BufferInfo.dwSize.X * BufferInfo.dwSize.Y);
+    SetLength(Buffer, BufferInfo.dwSize.X * BufferInfo.dwSize.Y);
 
-  BufferSize.X := BufferInfo.dwSize.X;
-  BufferSize.Y := BufferInfo.dwSize.Y;
-  BufferCoord.X := 0;
-  BufferCoord.Y := 0;
-  ReadRegion.Left := 0;
-  ReadRegion.Top := 0;
-  ReadRegion.Right := BufferInfo.dwSize.X;
-  ReadRegion.Bottom := BufferInfo.dwSize.Y;
+    BufferSize.X := BufferInfo.dwSize.X;
+    BufferSize.Y := BufferInfo.dwSize.Y;
+    BufferCoord.X := 0;
+    BufferCoord.Y := 0;
+    ReadRegion.Left := 0;
+    ReadRegion.Top := 0;
+    ReadRegion.Right := BufferInfo.dwSize.X;
+    ReadRegion.Bottom := BufferInfo.dwSize.Y;
 
-  if ReadConsoleOutput(ConsoleHandle, Pointer(Buffer), BufferSize, BufferCoord, ReadRegion) then
-  begin
-    for I := 0 to BufferInfo.dwSize.Y - 1 do
+    if ReadConsoleOutput(ConsoleHandle, Pointer(Buffer), BufferSize, BufferCoord, ReadRegion) then
     begin
-      Line := '';
-      for J := 0 to BufferInfo.dwSize.X - 1 do
-        Line := Line + Buffer[I * BufferInfo.dwSize.X + J].AsciiChar;
-      if Trim(Line) <> '' then
-        Result.Add(Trim(Line));
+      for I := 0 to BufferInfo.dwSize.Y - 1 do
+      begin
+        Line := '';
+        for J := 0 to BufferInfo.dwSize.X - 1 do
+          Line := Line + Buffer[I * BufferInfo.dwSize.X + J].AsciiChar;
+        if Trim(Line) <> '' then
+          Result.Add(Trim(Line));
+      end
     end
-  end
-  else
-    raise Exception.Create('ReadConsoleOutput error: ' + IntToStr(GetLastError));
-  FreeConsole;
+    //else
+    //  raise Exception.Create('ReadConsoleOutput error: ' + IntToStr(GetLastError));
+  finally
+    FreeConsole;
+  end;
 end;
 
 procedure TfLogs.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

@@ -40,7 +40,7 @@ uses
   uSettings;
 
 const
-  FileName = 'additional-ips';
+  FileName = {$IFDEF WIN32}'additional-ips'{$ELSE}'additional-ips.yml'{$ENDIF};
 
 procedure TfAdditionalIps.FormCreate(Sender: TObject);
 begin
@@ -58,6 +58,8 @@ begin
   lbIPs.Clear;
   with TStringList.Create do
   try
+    if not FileExists(ExtractFilePath(ParamStr(0)) + FileName) then
+      SaveToFile(ExtractFilePath(ParamStr(0)) + FileName);
     LoadFromFile(ExtractFilePath(ParamStr(0)) + FileName);
     for i := 0 to Pred(Count) do
     begin
