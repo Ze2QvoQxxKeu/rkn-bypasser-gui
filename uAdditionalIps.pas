@@ -40,7 +40,7 @@ uses
   uSettings;
 
 const
-  FileName = {$IFDEF WIN32}'additional-ips'{$ELSE}'additional-ips.yml'{$ENDIF};
+  FileName = 'additional-ips.yml';
 
 procedure TfAdditionalIps.FormCreate(Sender: TObject);
 begin

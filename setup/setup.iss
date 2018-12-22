@@ -35,8 +35,7 @@ Source: "D:\Soft\rkn-bypasser\v1.3\rkn_bypasser_gui-x64.exe"; DestDir: "{app}"; 
 Source: "D:\Soft\rkn-bypasser\v1.3\rkn_bypasser_gui-x86.exe"; DestDir: "{app}"; DestName: "rkn-bypasser-gui.exe"; Check: not Is64BitInstallMode; Flags: ignoreversion
 Source: "D:\Soft\rkn-bypasser\v1.3\rkn-bypasser-x64.exe"; DestDir: "{app}"; DestName: "rkn-bypasser.exe"; Check: Is64BitInstallMode; Flags: ignoreversion
 Source: "D:\Soft\rkn-bypasser\v1.3\rkn-bypasser-x86.exe"; DestDir: "{app}"; DestName: "rkn-bypasser.exe"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "D:\Soft\rkn-bypasser\v1.3\additional-ips"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "D:\Soft\rkn-bypasser\v1.3\additional-ips"; DestDir: "{app}"; DestName: "additional-ips.yml"; Check: Is64BitInstallMode; Flags: ignoreversion
+Source: "D:\Soft\rkn-bypasser\v1.3\additional-ips"; DestDir: "{app}"; DestName: "additional-ips.yml"; Flags: ignoreversion
 Source: "C:\Program Files (x86)\The Road To Delphi\VCL Styles Inno\VclStylesinno.dll"; DestDir: {app}; Flags: dontcopy
 Source: "C:\Program Files (x86)\The Road To Delphi\VCL Styles Inno\Styles\Carbon.vsf"; DestDir: {app}; Flags: dontcopy
 
