@@ -4873,7 +4873,7 @@ object fAbout: TfAbout
     Width = 392
     Height = 19
     AutoSize = False
-    Caption = 'Copyright (c) 2007-2018, The Tor Project, Inc.'
+    Caption = 'Copyright (c) 2007-2019, The Tor Project, Inc.'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -4890,10 +4890,10 @@ object fAbout: TfAbout
   object sWebLabel3: TsWebLabel
     Left = 286
     Top = 111
-    Width = 275
+    Width = 339
     Height = 19
     AutoSize = False
-    Caption = 'Copyright (c) 2018 Error13Tracer'
+    Caption = 'Copyright (c) 2018-2019 Error13Tracer'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
