@@ -1,5 +1,5 @@
 #define MyAppName "RKN Bypasser GUI"
-#define MyAppVersion "1.3"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "dimuls@yandex.ru & adm1n1strat1on@list.ru"
 #define MyAppURL "https://github.com/someanon/rkn-bypasser-gui"
 #define MyAppExeName "rkn-bypasser-gui.exe"
@@ -16,9 +16,9 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=D:\Soft\rkn-bypasser\v1.3\license.txt
+LicenseFile=D:\Soft\rkn-bypasser\v1.4\license.txt
 OutputBaseFilename=rkn-bypasser-gui-setup
-SetupIconFile=D:\Soft\rkn-bypasser\v1.3\icon.ico
+SetupIconFile=D:\Soft\rkn-bypasser\v1.4\icon.ico
 Compression=lzma
 SolidCompression=yes
 ArchitecturesInstallIn64BitMode=x64
@@ -29,13 +29,13 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "D:\Soft\rkn-bypasser\v1.3\Tor\*"; DestDir: "{app}\Tor"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Soft\rkn-bypasser\v1.4\Tor\*"; DestDir: "{app}\Tor"; Flags: ignoreversion recursesubdirs createallsubdirs
 
-Source: "D:\Soft\rkn-bypasser\v1.3\rkn_bypasser_gui-x64.exe"; DestDir: "{app}"; DestName: "rkn-bypasser-gui.exe"; Check: Is64BitInstallMode; Flags: ignoreversion
-Source: "D:\Soft\rkn-bypasser\v1.3\rkn_bypasser_gui-x86.exe"; DestDir: "{app}"; DestName: "rkn-bypasser-gui.exe"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "D:\Soft\rkn-bypasser\v1.3\rkn-bypasser-x64.exe"; DestDir: "{app}"; DestName: "rkn-bypasser.exe"; Check: Is64BitInstallMode; Flags: ignoreversion
-Source: "D:\Soft\rkn-bypasser\v1.3\rkn-bypasser-x86.exe"; DestDir: "{app}"; DestName: "rkn-bypasser.exe"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "D:\Soft\rkn-bypasser\v1.3\additional-ips"; DestDir: "{app}"; DestName: "additional-ips.yml"; Flags: ignoreversion
+Source: "D:\Soft\rkn-bypasser\v1.4\rkn_bypasser_gui-x64.exe"; DestDir: "{app}"; DestName: "rkn-bypasser-gui.exe"; Check: Is64BitInstallMode; Flags: ignoreversion
+Source: "D:\Soft\rkn-bypasser\v1.4\rkn_bypasser_gui-x86.exe"; DestDir: "{app}"; DestName: "rkn-bypasser-gui.exe"; Check: not Is64BitInstallMode; Flags: ignoreversion
+Source: "D:\Soft\rkn-bypasser\v1.4\rkn-bypasser-x64.exe"; DestDir: "{app}"; DestName: "rkn-bypasser.exe"; Check: Is64BitInstallMode; Flags: ignoreversion
+Source: "D:\Soft\rkn-bypasser\v1.4\rkn-bypasser-x86.exe"; DestDir: "{app}"; DestName: "rkn-bypasser.exe"; Check: not Is64BitInstallMode; Flags: ignoreversion
+Source: "D:\Soft\rkn-bypasser\v1.4\additional-ips"; DestDir: "{app}"; DestName: "additional-ips.yml"; Flags: ignoreversion
 Source: "C:\Program Files (x86)\The Road To Delphi\VCL Styles Inno\VclStylesinno.dll"; DestDir: {app}; Flags: dontcopy
 Source: "C:\Program Files (x86)\The Road To Delphi\VCL Styles Inno\Styles\Carbon.vsf"; DestDir: {app}; Flags: dontcopy
 
@@ -47,7 +47,8 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
-[Registry]                                                                          
+[Registry]                                                                          
+[Registry]                                                                          
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: {#MyAppName}; ValueData: """{app}\{#MyAppExeName}"""; Flags: uninsdeletekey
 
 [Run]
